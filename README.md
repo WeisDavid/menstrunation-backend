@@ -16,3 +16,10 @@ Im Terminal im Projektordner:
 Im Terminal im Projektordner:
 
 - docker compose up -d
+
+
+## FastAPI development
+
+Im Terminal im Projektordner:
+
+- uvicorn main:app --reload
