@@ -21,5 +21,13 @@ services:
     depends_on:
       - db
 
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_PORT=3306
+
 volumes:
   dbdata:
