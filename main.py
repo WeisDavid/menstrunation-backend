@@ -16,7 +16,7 @@ testUser = {
 async def root():
     return {"message": "Hello World"}
 
-@app.get("/user/getById/{userId}")
+@app.get("/user/getById/{user_id}")
 async def get_user_by_id(user_id: str):
     if user_id == "55":
         return testUser
