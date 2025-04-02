@@ -17,10 +17,10 @@ async def root():
     return {"message": "Hello World"}
 
 @app.get("/user/getById/{userId}")
-async def getUserById(userId: str):
-    if userId == "55":
+async def get_user_by_id(user_id: str):
+    if user_id == "55":
         return testUser
     else:
-        return {"message": "User with ID " + userId + " does not exist!"}
+        return {"message": "User with ID " + user_id + " does not exist!"}
 
 
