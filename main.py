@@ -4,6 +4,14 @@ from pydantic import BaseModel, Field, EmailStr
 
 app = FastAPI()
 
+class UserModell(BaseModel):
+    id: int
+    pw: str
+    email: EmailStr
+    alter: int | None
+    gewicht: float | None
+    größe: float | None
+
 class UpdateRequest(BaseModel):
     username: str | None = Field( default=None, title="Neuer Benutzername" )
     pw: str | None = Field( default=None, title="Neues Passwort der Benutzers" )
@@ -11,6 +19,9 @@ class UpdateRequest(BaseModel):
     alter: int | None = Field( default=None, title="Neues Alter des Benutzers" )
     gewicht: float | None = Field( default=None, title="Neues Gewicht des Benutzers" )
     größe: float | None = Field( default=None, title="Neue Größe des Benutzers" )
+
+user_list: list[UserModell] = []
+
 
 
 @app.get("/")
