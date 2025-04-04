@@ -5,7 +5,6 @@ app = FastAPI()
 testUser = {
     "id": "55",
     "userName": "testman",
-    "pw": "wawa123",
     "email": "testmail@test.com",
     "alter": 22,
     "gewicht": 80,
