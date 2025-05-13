@@ -1,3 +1,4 @@
+from fastapi import FastAPI, Query
 from typing import Annotated
 
 from fastapi import FastAPI, Query, Path, HTTPException
