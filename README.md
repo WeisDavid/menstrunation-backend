@@ -21,7 +21,7 @@ Im Terminal im Projektordner:
 
 Im Terminal im Projektordner:
 
-- docker compose up -d
+- docker compose build && docker compose up -d
 
 
 ## FastAPI development
