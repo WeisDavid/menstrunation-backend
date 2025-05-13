@@ -8,6 +8,7 @@ from models.users import User, CreateUser
 
 app = FastAPI()
 
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
@@ -38,3 +39,13 @@ def validate_update_numbers(update_request: CreateUser):
     if update_request.alter is not None:
         if update_request.alter < 0:
             raise HTTPException(400, "Übergebene Werte dürfen nicht negativ sein!")
+            
+
+@app.delete("/user_delete/{user_id}")
+async def user_delete(user_id: int , session: SessionDep):
+
+    deleted = delete_single_entity_by_id(session, User, user_id)
+    if deleted is None: 
+        raise HTTPException(status_code=404, detail=f"User with ID {user_id} not found")
+    
+    return JSONResponse(status_code=204, content={"message": f"User with ID {user_id} deleted successfully."})
