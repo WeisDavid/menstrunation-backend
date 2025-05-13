@@ -1,8 +1,6 @@
-import logging
-from platform import system
+from typing import Annotated
 
 from fastapi import FastAPI, Query, Path, HTTPException
-from typing import Annotated
 from pydantic import BaseModel, Field, EmailStr
 
 app = FastAPI()
@@ -60,7 +58,7 @@ async def root():
     return {"message": "Hello World"}
 
 @app.put("/user/update/{user_id}", response_model=UpdateResponse)
-async def update_user(user_id: Annotated[ int, Path(title="Benutzer ID", description="ID des Benutzers") ], update_request: Annotated[UpdateRequest, Query()]) -> any:
+async def update_user(user_id: Annotated[ int, Path(title="Benutzer ID", description="ID des Benutzers") ], update_request: UpdateRequest) -> any:
     return update_user_attributes(user_id, update_request)
 
 
