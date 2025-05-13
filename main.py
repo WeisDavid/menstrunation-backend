@@ -16,7 +16,7 @@ class UserModell(BaseModel):
 class UpdateRequest(BaseModel):
     username: str | None = Field( default=None, title="Neuer Benutzername" )
     pw: str | None = Field( default=None, title="Neues Passwort der Benutzers" )
-    email: EmailStr | None = Field( default=None, title="Neues Email des Benutzers" )
+    email: EmailStr | None = Field( default=None, title="Neue Email des Benutzers" )
     alter: int | None = Field( default=None, title="Neues Alter des Benutzers" )
     gewicht: float | None = Field( default=None, title="Neues Gewicht des Benutzers" )
     größe: float | None = Field( default=None, title="Neue Größe des Benutzers" )
