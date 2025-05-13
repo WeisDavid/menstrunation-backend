@@ -1,7 +1,6 @@
-from fastapi import FastAPI, Query
 from typing import Annotated
 
-from fastapi import FastAPI, Query, Path, HTTPException
+from fastapi import FastAPI, Path, HTTPException
 from pydantic import BaseModel, Field, EmailStr
 
 from db import SessionDep, get_single_entity_by_id, create_single_entity_by_id, update_single_entity_by_id, delete_single_entity_by_id
