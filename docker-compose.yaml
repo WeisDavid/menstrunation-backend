@@ -15,7 +15,7 @@ services:
   web:
     build: .
     environment:
-      DATABASE_URL: mysql://fastapi_user:fastapi_password@db:3306/fastapi_db
+      DATABASE_URL: mysql+pymysql://fastapi_user:fastapi_password@db:3306/fastapi_db
     ports:
       - "8000:8000"
     depends_on:
