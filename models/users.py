@@ -13,11 +13,11 @@ class User(SQLModel, table=True):
 
 
 class CreateUser(SQLModel):
-    username: str
-    """email: str
-    password: str"""
-    alter: int
-    gewicht: float
-    groesse: float
+    username: str | None
+    """email: str | None
+    password: str | None"""
+    alter: int | None
+    gewicht: float | None
+    groesse: float | None
 
     model_config = ConfigDict(from_attributes=True)
