@@ -12,7 +12,6 @@ async def user_delete(user_id: int):
 
     if user_exists:
         delete_message = "User deleted successfully"    
-        #delete = {"delete_message": "User deleted successfully"}
         return delete_message 
     else:
         raise HTTPException(status_code=404, detail=f"User with ID {user_id} not found")
