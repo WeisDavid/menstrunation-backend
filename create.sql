@@ -1,4 +1,4 @@
-CREATE TABLE benutzer(
+CREATE TABLE user(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     username varchar(20),
     `alter` INT,
@@ -6,19 +6,19 @@ CREATE TABLE benutzer(
     groesse FLOAT
 );
 
-CREATE TABLE produkt(
+CREATE TABLE product(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     name varchar(20),
     beschreibung TEXT
 );
 
-CREATE TABLE haendler( 
+CREATE TABLE handler( 
 	ID INT PRIMARY KEY AUTO_INCREMENT, 
 	name varchar(20), 
 	registerNr INT 
 );
 
-CREATE TABLE bewertung(
+CREATE TABLE rating(
      ID INT PRIMARY KEY AUTO_INCREMENT,
      punktzahl INT, 
      beschreibung VARCHAR(255), 
@@ -28,7 +28,7 @@ CREATE TABLE bewertung(
      FOREIGN KEY (produktID) REFERENCES produkt (ID)
  ); 
 
-CREATE TABLE kauf(
+CREATE TABLE buy(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     benutzerID INT,
     FOREIGN KEY(benutzerID) REFERENCES benutzer (ID),
@@ -38,7 +38,7 @@ CREATE TABLE kauf(
     FOREIGN KEY(haendlerID) REFERENCES haendler (ID)
     );
 
-CREATE TABLE angebot (
+CREATE TABLE offer (
  
     ID int PRIMARY KEY AUTO_INCREMENT,
     preis float,
@@ -50,7 +50,7 @@ CREATE TABLE angebot (
 ALTER TABLE angebot
 	ADD FOREIGN KEY (haendlerID) REFERENCES haendler(ID);
 
-CREATE TABLE zyklus (
+CREATE TABLE cycle (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     eisprung DATE,
     benutzerID INT,
@@ -72,14 +72,14 @@ CREATE TABLE buddy(
     FOREIGN KEY(benutzerID2) REFERENCES benutzer (ID)
     );
 
-CREATE TABLE chillTag (
+CREATE TABLE chillDay (
   ID INT PRIMARY KEY AUTO_INCREMENT,
   datum DATE,
   zyklusID INT,
   FOREIGN KEY (zyklusID) REFERENCES zyklus (ID)
 );
 
-CREATE TABLE periodenTag (
+CREATE TABLE periodDay (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     schmerzlevel INT,
     befinden TEXT,

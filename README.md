@@ -23,6 +23,7 @@ Im Terminal im Projektordner:
 Im Terminal im Projektordner:
 
 - docker compose build && docker compose up -d
+- für Windows: "&&" ersetzen mit ";" 
 
 
 ## FastAPI development
