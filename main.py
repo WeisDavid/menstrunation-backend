@@ -6,6 +6,8 @@ from models.users import User, CreateUser
 app = FastAPI()
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+
+@app.get("/user_delete/{user_id}")
+async def user_delete(user_id: int):    
+    delete = {"delete_message": "User deleted successfully"}
+    return delete
