@@ -12,7 +12,7 @@ CREATE TABLE product(
     beschreibung TEXT
 );
 
-CREATE TABLE handler( 
+CREATE TABLE vendor(
 	ID INT PRIMARY KEY AUTO_INCREMENT, 
 	name varchar(20), 
 	registerNr INT 
@@ -28,7 +28,7 @@ CREATE TABLE rating(
      FOREIGN KEY (produktID) REFERENCES produkt (ID)
  ); 
 
-CREATE TABLE buy(
+CREATE TABLE purchase(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     benutzerID INT,
     FOREIGN KEY(benutzerID) REFERENCES benutzer (ID),
@@ -47,7 +47,7 @@ CREATE TABLE offer (
     haendlerID int
 );
 
-ALTER TABLE angebot
+ALTER TABLE offer
 	ADD FOREIGN KEY (haendlerID) REFERENCES haendler(ID);
 
 CREATE TABLE cycle (
@@ -57,7 +57,7 @@ CREATE TABLE cycle (
     FOREIGN KEY (benutzerID) REFERENCES benutzer (ID)
 );
  
-CREATE TABLE fruchtbarerTag (
+CREATE TABLE fertileDay (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     schwangerschaftswahrscheinlichkeit FLOAT,
     zyklusID INT,
