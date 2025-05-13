@@ -5,13 +5,26 @@ from fastapi.responses import  JSONResponse
 
 from db import SessionDep, get_single_entity_by_id, create_single_entity_by_id, update_single_entity_by_id, delete_single_entity_by_id
 from models.users import User, CreateUser
+from pydantic import BaseModel
+
+class userIn(BaseModel):
+    username: str
+    email: str
+    alter: int
+    gewicht: float
+    groesse: float
+
+class userOut(BaseModel):
+    id: int
 
 app = FastAPI()
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+@app.post("/user/", response_model=userOut)
+async def create_user(user: CreateUser, session: SessionDep):
+    create_single_entity_by_id(session, User, user)
+    return {"id": 111}
+
 
 @app.put("/user/update/{user_id}", response_model=None)
 async def update_user(user_id: Annotated[ int, Path(title="Benutzer ID", description="ID des Benutzers") ], update_request: CreateUser, session: SessionDep) -> any:
