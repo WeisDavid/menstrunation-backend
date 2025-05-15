@@ -93,7 +93,7 @@ def update_single_entity_by_id(session: Session, model_class: type[SQLModel], up
     if not model_copy:
         return None
     
-    for key, value in updated_model.model_dump(exclude_unset=True).items():
+    for key, value in updated_model.model_dump(exclude_unset=True, exclude_none=True).items():
         setattr(model_copy, key, value)
         
     session.commit()

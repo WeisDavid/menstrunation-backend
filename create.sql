@@ -1,89 +1,87 @@
-CREATE TABLE user(
+CREATE TABLE users(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     username varchar(20),
-    `alter` INT,
-    gewicht FLOAT,
-    groesse FLOAT
+    password varchar(64),
+    age INT,
+    weight FLOAT,
+    height FLOAT
 );
 
-CREATE TABLE product(
+CREATE TABLE products(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     name varchar(20),
-    beschreibung TEXT
+    description TEXT
 );
 
-CREATE TABLE vendor(
+CREATE TABLE vendors(
 	ID INT PRIMARY KEY AUTO_INCREMENT, 
 	name varchar(20), 
 	registerNr INT 
 );
 
-CREATE TABLE rating(
+CREATE TABLE ratings(
      ID INT PRIMARY KEY AUTO_INCREMENT,
-     punktzahl INT, 
-     beschreibung VARCHAR(255), 
-     produktID INT,
-     benutzerID INT,
-     FOREIGN KEY (benutzerID) REFERENCES benutzer (ID),
-     FOREIGN KEY (produktID) REFERENCES produkt (ID)
+     rating INT, 
+     description VARCHAR(255), 
+     productID INT,
+     userID INT,
+     FOREIGN KEY (userID) REFERENCES users(ID),
+     FOREIGN KEY (productID) REFERENCES product(ID)
  ); 
 
-CREATE TABLE purchase(
+CREATE TABLE purchases(
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    benutzerID INT,
-    FOREIGN KEY(benutzerID) REFERENCES benutzer (ID),
-    produktID INT,
-    FOREIGN KEY(produktID) REFERENCES produkt (ID),
-    haendlerID INT,
-    FOREIGN KEY(haendlerID) REFERENCES haendler (ID)
+    userID INT,
+    FOREIGN KEY(userID) REFERENCES users(ID),
+    productID INT,
+    FOREIGN KEY(productID) REFERENCES products(ID),
+    vendorID INT,
+    FOREIGN KEY(vendorID) REFERENCES vendors(ID)
     );
 
-CREATE TABLE offer (
- 
+CREATE TABLE offers(
     ID int PRIMARY KEY AUTO_INCREMENT,
-    preis float,
-    produktID int,
-    FOREIGN KEY(produktID) REFERENCES produkt (ID),
-    haendlerID int
+    price float,
+    productID int,
+    FOREIGN KEY(productID) REFERENCES product(ID),
+    vendorID int,
+    FOREIGN KEY(vendorID) REFERENCES vendors(ID),
 );
 
-ALTER TABLE offer
-	ADD FOREIGN KEY (haendlerID) REFERENCES haendler(ID);
-
-CREATE TABLE cycle (
+CREATE TABLE cycles(
     ID INT AUTO_INCREMENT PRIMARY KEY,
-    eisprung DATE,
-    benutzerID INT,
-    FOREIGN KEY (benutzerID) REFERENCES benutzer (ID)
+    ovulation DATE,
+    userID INT,
+    FOREIGN KEY (userID) REFERENCES users(ID)
 );
  
-CREATE TABLE fertileDay (
+CREATE TABLE fertileDays(
     ID INT AUTO_INCREMENT PRIMARY KEY,
-    schwangerschaftswahrscheinlichkeit FLOAT,
-    zyklusID INT,
-    FOREIGN KEY (zyklusID) REFERENCES zyklus(ID)
+    pregnancy_probability FLOAT,
+    cycleID INT,
+    FOREIGN KEY (cycleID) REFERENCES cycles(ID)
 );
 
-CREATE TABLE buddy(
+CREATE TABLE buddys(
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    benutzerID1 INT,
-    FOREIGN KEY(benutzerID1) REFERENCES benutzer (ID),
-    benutzerID2 INT,
-    FOREIGN KEY(benutzerID2) REFERENCES benutzer (ID)
+    userID1 INT,
+    FOREIGN KEY(userID1) REFERENCES users(ID),
+    userID2 INT,
+    FOREIGN KEY(userID2) REFERENCES users(ID)
     );
 
-CREATE TABLE chillDay (
+CREATE TABLE chillDays(
   ID INT PRIMARY KEY AUTO_INCREMENT,
-  datum DATE,
-  zyklusID INT,
-  FOREIGN KEY (zyklusID) REFERENCES zyklus (ID)
+  date DATE,
+  cycleID INT,
+  FOREIGN KEY (cycleID) REFERENCES cycles(ID)
 );
 
-CREATE TABLE periodDay (
+CREATE TABLE periodDays(
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    schmerzlevel INT,
-    befinden TEXT,
-    datum DATE,
-    zyklusID INT,
-    FOREIGN KEY (zyklusID) REFERENCES zyklus(ID)
+    painlvl INT,
+    condition TEXT,
+    date DATE,
+    cycleID INT,
+    FOREIGN KEY (cycleID) REFERENCES cycles(ID)
 );
