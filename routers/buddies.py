@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from typing import Annotated
 
 
-from db.default import SessionDep
+from db.session import SessionDep
 from fastapi import Path, HTTPException
 from fastapi.responses import  JSONResponse
 
