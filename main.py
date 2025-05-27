@@ -4,8 +4,10 @@ from fastapi import FastAPI, Path, HTTPException, status
 from fastapi.responses import  JSONResponse
 
 from db import SessionDep, get_single_entity_by_id, create_single_entity_by_id, update_single_entity_by_id, delete_single_entity_by_id
+from models.buddy import Buddy, BuddyPublic
 from models.users import User, CreateUser
 from pydantic import BaseModel
+from routers.buddies import buddy_router
 
 class userIn(BaseModel):
     username: str
@@ -18,6 +20,7 @@ class userOut(BaseModel):
     id: int
 
 app = FastAPI()
+app.include_router(buddy_router)
 
 
 @app.post("/user/", response_model=userOut)
