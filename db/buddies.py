@@ -41,7 +41,7 @@ def get_buddies_by_id(session: Session, user_id: int):
     return buddy_users
 
 def delete_buddies_by_id(session: Session, buddy_id: int):
-    buddy = get_buddy_by_id(session, buddy_id)
+    buddy = session.get(BuddyTable, buddy_id)
     if not buddy:
         return None
     session.delete(buddy)
