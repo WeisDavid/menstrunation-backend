@@ -63,7 +63,7 @@ CREATE TABLE fertileDays(
     FOREIGN KEY (cycleID) REFERENCES cycles(ID)
 );
 
-CREATE TABLE buddys(
+CREATE TABLE buddies(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     userID1 INT,
     FOREIGN KEY(userID1) REFERENCES users(ID),
