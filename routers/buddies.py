@@ -2,11 +2,11 @@ from fastapi import APIRouter
 from typing import Annotated
 
 
-from db import SessionDep, get_single_entity_by_id, create_single_entity_by_id
-from fastapi import FastAPI, Path, HTTPException, status
+from db.default import SessionDep
+from fastapi import Path, HTTPException
 from fastapi.responses import  JSONResponse
 
-from db.buddies import create_buddy_in_db
+from db.buddies import create_buddy_in_db, delete_buddies_by_id
 from models.buddy import BuddyCreate
 
 buddy_router = APIRouter(
