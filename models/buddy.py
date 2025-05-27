@@ -4,8 +4,8 @@ from sqlmodel import SQLModel, Field
 
 
 class BuddyBase(SQLModel):
-    benutzer_id_1: int | None = Field(default=None, foreign_key="user.id")
-    benutzer_id_2: int | None = Field(default=None, foreign_key="user.id")
+    userID1: int | None = Field(default=None, foreign_key="users.id", ondelete="CASCADE")
+    userID2: int | None = Field(default=None, foreign_key="users.id", ondelete="CASCADE")
 
 
 class BuddyCreate(BuddyBase):
