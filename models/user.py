@@ -18,11 +18,14 @@ class UserRequest(UserBase):
 
 
 class UserResponse(UserBase):
-    pass
+    model_config = ConfigDict(from_attributes=True)
 
 class CreateUser(UserBase):
     password: str
 
+    model_config = ConfigDict(from_attributes=True)
+
+class UpdateUser(UserBase):
     model_config = ConfigDict(from_attributes=True)
 
 class UserInDB(UserBase):
@@ -38,6 +41,8 @@ class UserTable(UserInDB, table=True):
     __tablename__ = "users"
 
     id: int | None = Field(default=None, primary_key=True)
+
+    model_config = ConfigDict(from_attributes=True)
 
     @classmethod
     def from_create_user(cls, user: CreateUser):
