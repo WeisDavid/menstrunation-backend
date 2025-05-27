@@ -1,13 +1,12 @@
 import os
 
 from typing import Annotated
-from pydantic import ConfigDict
 
 from fastapi import Depends
 from sqlmodel import Session, SQLModel, create_engine, select
 
 
-maria_url = os.getenv("DATABASE_URL")
+maria_url = os.getenv("DATABASE_URL") or "mysql+pymysql://fastapi_user:fastapi_password@db:3306/fastapi_db"
 engine = create_engine(maria_url)
 
 def get_session():
@@ -37,6 +36,7 @@ def get_single_entity_by_id(session: Session, model: type[SQLModel], id: int) ->
     model_copy = session.get(model, id)
     if not model_copy:
         return None
+    
     return model_copy
 
 
@@ -72,6 +72,8 @@ def create_single_entity_by_id(session: Session, model_class: type[SQLModel], cr
     session.add(model_copy)
     session.commit()
     session.refresh(model_copy)
+
+    return model_copy.id
 
 
 def update_single_entity_by_id(session: Session, model_class: type[SQLModel], updated_model: SQLModel, id: int):
