@@ -1,6 +1,7 @@
 CREATE TABLE users(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     username varchar(20),
+    email varchar(50),
     password varchar(64),
     age INT,
     weight FLOAT,
@@ -26,7 +27,7 @@ CREATE TABLE ratings(
      productID INT,
      userID INT,
      FOREIGN KEY (userID) REFERENCES users(ID),
-     FOREIGN KEY (productID) REFERENCES product(ID)
+     FOREIGN KEY (productID) REFERENCES products(ID)
  ); 
 
 CREATE TABLE purchases(
@@ -43,9 +44,9 @@ CREATE TABLE offers(
     ID int PRIMARY KEY AUTO_INCREMENT,
     price float,
     productID int,
-    FOREIGN KEY(productID) REFERENCES product(ID),
+    FOREIGN KEY(productID) REFERENCES products(ID),
     vendorID int,
-    FOREIGN KEY(vendorID) REFERENCES vendors(ID),
+    FOREIGN KEY(vendorID) REFERENCES vendors(ID)
 );
 
 CREATE TABLE cycles(
@@ -80,7 +81,7 @@ CREATE TABLE chillDays(
 CREATE TABLE periodDays(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     painlvl INT,
-    condition TEXT,
+    ´condition´ TEXT,
     date DATE,
     cycleID INT,
     FOREIGN KEY (cycleID) REFERENCES cycles(ID)
