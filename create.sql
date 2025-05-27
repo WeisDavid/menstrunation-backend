@@ -49,20 +49,6 @@ CREATE TABLE offers(
     FOREIGN KEY(vendorID) REFERENCES vendors(ID)
 );
 
-CREATE TABLE cycles(
-    ID INT AUTO_INCREMENT PRIMARY KEY,
-    ovulation DATE,
-    userID INT,
-    FOREIGN KEY (userID) REFERENCES users(ID)
-);
- 
-CREATE TABLE fertileDays(
-    ID INT AUTO_INCREMENT PRIMARY KEY,
-    pregnancy_probability FLOAT,
-    cycleID INT,
-    FOREIGN KEY (cycleID) REFERENCES cycles(ID)
-);
-
 CREATE TABLE buddies(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     userID1 INT,
@@ -71,18 +57,12 @@ CREATE TABLE buddies(
     FOREIGN KEY(userID2) REFERENCES users(ID)
     );
 
-CREATE TABLE chillDays(
-  ID INT PRIMARY KEY AUTO_INCREMENT,
-  date DATE,
-  cycleID INT,
-  FOREIGN KEY (cycleID) REFERENCES cycles(ID)
-);
-
-CREATE TABLE periodDays(
+CREATE TABLE diaryDays (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     painlvl INT,
-    ´condition´ TEXT,
+    ´content´ TEXT,
     date DATE,
-    cycleID INT,
-    FOREIGN KEY (cycleID) REFERENCES cycles(ID)
+    isPeriod BOOLEAN,
+    userID INT,
+    FOREIGN KEY (userID) REFERENCES users(ID)
 );
