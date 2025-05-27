@@ -60,7 +60,7 @@ CREATE TABLE buddies(
 CREATE TABLE diaryDays (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     painlvl INT,
-    ´content´ TEXT,
+    content TEXT,
     date DATE,
     isPeriod BOOLEAN,
     userID INT,
