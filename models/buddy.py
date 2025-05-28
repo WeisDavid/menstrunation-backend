@@ -1,5 +1,5 @@
 from markdown_it.rules_block import table
-from pydantic import ConfigDict
+from pydantic import ConfigDict, BaseModel
 from sqlmodel import SQLModel, Field
 
 
@@ -8,7 +8,9 @@ class BuddyBase(SQLModel):
     userID2: int | None = Field(default=None, foreign_key="users.id", ondelete="CASCADE")
 
 
-class BuddyCreate(BuddyBase):
+class BuddyFrontend(BaseModel):
+    username: str
+
     model_config = ConfigDict(from_attributes=True)
 
 class BuddyInDB(BuddyBase):
