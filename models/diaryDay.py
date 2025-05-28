@@ -8,7 +8,7 @@ import datetime
 class DiaryDay(SQLModel, table=True):
     __tablename__ = "diaryDays"
 
-    id: int = Field (primary_key=True)
+    id: int | None = Field (primary_key=True)
     painlvl: int
     date: datetime.date
     content: str
@@ -19,6 +19,16 @@ class DiaryDay(SQLModel, table=True):
 
 class DiaryDayresponse(SQLModel):
     id: int
+    painlvl: int
+    date: datetime.date
+    content: str
+    isPeriod: bool
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class DiaryDayinput(SQLModel):
+
     painlvl: int
     date: datetime.date
     content: str
