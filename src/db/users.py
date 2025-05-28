@@ -1,4 +1,4 @@
-from sqlmodel import Session, SQLModel, select
+from sqlmodel import Session, select
 
 from models.user import UserTable, CreateUser, UserInDB, UpdateUser
 

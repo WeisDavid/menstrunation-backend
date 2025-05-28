@@ -1,10 +1,10 @@
-from fastapi import APIRouter, HTTPException, Path, Depends
+from fastapi import APIRouter, HTTPException, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.responses import JSONResponse
 from typing import Annotated
 
 from db.session import SessionDep
-from models.user import UserRequest, CreateUser, UserInDB, UserResponse, UpdateUser
+from models.user import CreateUser, UserInDB, UserResponse, UpdateUser
 from models.token import Token
 from db.users import get_single_user_by_username, create_user_in_db, update_user_in_db, delete_user_in_db, get_all_users_in_db
 from utils.token import get_current_user, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
