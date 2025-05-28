@@ -22,11 +22,12 @@ Im Terminal im Projektordner:
 
 Im Terminal im Projektordner:
 
-- dev
-    - docker compose down -v
-    - docker compose build
-    - docker compose up -d
+- docker compose build && docker compose up -d
+- für Windows: "&&" ersetzen mit ";" 
 
-- prod
-    - docker compose build
-    - docker compose up -d
+
+## FastAPI development
+
+Im Terminal im Projektordner:
+
+- uvicorn main:app --reload

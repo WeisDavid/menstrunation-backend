@@ -1,7 +1,7 @@
 from sqlmodel import Session, select
 
-from db.users import get_single_user_by_id
-from models.buddy import BuddyCreate, BuddyTable, BuddyInDB
+from db.users import get_single_user_by_id, get_single_user_by_username
+from models.buddy import BuddyFrontend, BuddyTable, BuddyInDB
 from models.user import UserInDB
 
 
@@ -11,8 +11,16 @@ def get_buddy_by_id(session: Session, buddy_id: int):
         return None
     return BuddyInDB.model_validate(buddy)
 
-def create_buddy_in_db(session: Session, buddy: BuddyCreate):
-    validated_buddy = BuddyTable.model_validate(buddy)
+def create_buddy_in_db(session: Session, current_user_id: int, buddy: BuddyFrontend):
+
+    buddy_user = get_single_user_by_username(session, buddy.username)
+
+    if not buddy_user:
+        return None
+
+    create_buddy = { "userID1": current_user_id, "userID2": buddy_user.id }
+
+    validated_buddy = BuddyTable.model_validate(create_buddy)
     session.add(validated_buddy)
     session.commit()
     session.refresh(validated_buddy)
@@ -40,8 +48,33 @@ def get_buddies_by_id(session: Session, user_id: int):
 
     return buddy_users
 
-def delete_buddies_by_id(session: Session, buddy_id: int):
-    buddy = session.get(BuddyTable, buddy_id)
+def delete_buddies_by_id(session: Session, current_user_id: int, buddy: BuddyFrontend):
+    buddy_user = get_single_user_by_username(session, buddy.username)
+
+    if not buddy_user:
+        return None
+
+    statement_self = select(BuddyTable).where(BuddyTable.userID1 == current_user_id)
+    statement_other = select(BuddyTable).where(BuddyTable.userID2 == current_user_id)
+
+    buddies_by_self = session.exec(statement_self).all()
+    buddies_by_other = session.exec(statement_other).all()
+
+    if not buddies_by_self and not buddies_by_other:
+        return None
+
+    buddy_list = []
+
+    for buddy in buddies_by_self:
+        if buddy.userID2 == buddy_user.id:
+            buddy_list.append(buddy)
+
+    for buddy in buddies_by_other:
+        if buddy.userID1 == buddy_user.id:
+            buddy_list.append(buddy)
+
+
+    buddy = session.get(BuddyTable, buddy_list[0].id)
     if not buddy:
         return None
     session.delete(buddy)
