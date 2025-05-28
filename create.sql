@@ -1,48 +1,27 @@
 CREATE TABLE users(
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    username varchar(20),
+    username varchar(20) UNIQUE,
     email varchar(50),
     password varchar(64),
     age INT,
     weight FLOAT,
     height FLOAT
 );
-  
-CREATE TABLE cycles(
-    ID INT AUTO_INCREMENT PRIMARY KEY,
-    ovulation DATE,
-    userID INT,
-    FOREIGN KEY (userID) REFERENCES users(ID)
-);
-
-CREATE TABLE fertileDays(
-    ID INT AUTO_INCREMENT PRIMARY KEY,
-    pregnancy_probability FLOAT,
-    cycleID INT,
-    FOREIGN KEY (cycleID) REFERENCES cycles(ID)
-);
  
-CREATE TABLE buddys(
+CREATE TABLE buddies(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     userID1 INT,
-    FOREIGN KEY(userID1) REFERENCES users(ID),
+    FOREIGN KEY(userID1) REFERENCES users(ID) ON DELETE CASCADE,
     userID2 INT,
-    FOREIGN KEY(userID2) REFERENCES users(ID)
+    FOREIGN KEY(userID2) REFERENCES users(ID) ON DELETE CASCADE
     );
  
-CREATE TABLE chillDays(
-  ID INT PRIMARY KEY AUTO_INCREMENT,
-  date DATE,
-  cycleID INT,
-  FOREIGN KEY (cycleID) REFERENCES cycles(ID)
-);
- 
-CREATE TABLE diaryDays(
+CREATE TABLE diaryDays (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     painlvl INT,
     content TEXT,
-    periodday BOOLEAN,
     date DATE,
-    cycleID INT,
-    FOREIGN KEY (cycleID) REFERENCES cycles(ID)
-); 
+    isPeriod BOOLEAN,
+    userID INT,
+    FOREIGN KEY (userID) REFERENCES users(ID) ON DELETE CASCADE
+);

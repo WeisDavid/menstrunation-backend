@@ -6,14 +6,13 @@ import datetime
 
 
 class DiaryDay(SQLModel, table=True):
-    __tablename__ = "diaryDay"
+    __tablename__ = "diaryDays"
 
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: int = Field (primary_key=True)
     painlvl: int
     date: datetime.date
-    cycleID: int
     content: str
-    periodday: bool
+    isPeriod: bool
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -23,7 +22,6 @@ class DiaryDayresponse(SQLModel):
     painlvl: int
     date: datetime.date
     content: str
-    periodday: bool
-    cycleID: int
+    isPeriod: bool
 
     model_config = ConfigDict(from_attributes=True)

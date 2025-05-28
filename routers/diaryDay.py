@@ -11,8 +11,8 @@ router = APIRouter(
 
 @router.get("/{id}")
 async def get_diaryDay(id: int, session: SessionDep):
-    DiaryDay = session.get(DiaryDay, id)
-    if DiaryDay is None:
+    diaryDay = session.get(DiaryDay, id)
+    if diaryDay is None:
         raise HTTPException(status_code=404, detail="Diary entry not found")
 
-    return DiaryDayresponse.model_validate(DiaryDay)
+    return DiaryDayresponse.model_validate(diaryDay)
