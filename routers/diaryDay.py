@@ -1,8 +1,7 @@
-from db import update_single_entity_by_id, delete_single_entity_by_id, create_single_entity_by_id
-from fastapi import HTTPException, APIRouter, status
+from fastapi import HTTPException, APIRouter
 from fastapi.responses import  JSONResponse
 from models.diaryDay import DiaryDay, DiaryDayresponse, DiaryDayinput
-from db import SessionDep
+from db.session import SessionDep
 
 router = APIRouter(
     prefix="/diaryDay",

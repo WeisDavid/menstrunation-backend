@@ -22,5 +22,6 @@ CREATE TABLE diaryDays (
     content TEXT,
     date DATE,
     isPeriod BOOLEAN,
+    userID INT,
     FOREIGN KEY (userID) REFERENCES users(ID) ON DELETE CASCADE
   );
