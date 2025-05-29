@@ -1,14 +1,13 @@
 import pytest
 from fastapi.testclient import TestClient
-from db.session import get_session
-from models.buddy import BuddyTable
-from utils.token import get_current_user
-from utils.pw_auth import get_password_hash
 from sqlmodel import create_engine, SQLModel, Session, select
 from sqlmodel.pool import StaticPool
 
+from db.session import get_session
 from main import app
+from models.buddy import BuddyTable
 from models.user import UserTable
+from utils.token import get_current_user
 
 
 @pytest.fixture(name="session")
