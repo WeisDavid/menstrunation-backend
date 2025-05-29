@@ -129,3 +129,33 @@ def test_delete_buddy_failure_no_buddies_with_specified_user(session: Session, c
     assert response.status_code == 404
     assert "not found" in data["detail"]
 
+def test_get_my_buddies_success_with_no_buddies(session: Session, client: TestClient):
+
+    response = client.get("/buddy/get")
+    data = response.json()
+
+    assert response.status_code == 200
+    assert data == []
+
+def test_get_my_buddies_success_with_buddies(session: Session, client: TestClient):
+    user_other = UserTable(id=2, username="test2", email="test2@mail.com", hashed_password="pass2")
+    user_other2 = UserTable(id=3, username="test3", email="test3@mail.com", hashed_password="pass3")
+    buddy_by_me = BuddyTable(userID1=1, userID2=2)
+    buddy_by_me2 = BuddyTable(userID1=3, userID2=1)
+
+    session.add(user_other)
+    session.add(user_other2)
+    session.add(buddy_by_me)
+    session.add(buddy_by_me2)
+    session.commit()
+
+    response = client.get("/buddy/get")
+    data = response.json()
+
+    assert response.status_code == 200
+    assert data is not []
+    assert len(data) == 2
+    data_user_1 = data[0]
+    assert data_user_1["username"] == "test2"
+    data_user_2 = data[1]
+    assert data_user_2["username"] == "test3"
