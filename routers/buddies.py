@@ -20,7 +20,7 @@ buddy_router = APIRouter(
 async def create_buddy(current_user: Annotated[UserInDB, Depends(get_current_user)], buddy: BuddyFrontend, session: SessionDep) -> any:
     created_buddy_id = create_buddy_in_db(session, current_user.id, buddy)
     if created_buddy_id is None:
-        raise HTTPException(status_code=400, detail=f"User with username {buddy.username} not found")
+        raise HTTPException(status_code=404, detail=f"User with username {buddy.username} not found")
 
     return JSONResponse(status_code=204, content={"message": f"Buddy with username {buddy.username} created successfully"})
 

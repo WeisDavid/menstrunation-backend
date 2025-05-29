@@ -4,13 +4,6 @@ from db.users import get_single_user_by_id, get_single_user_by_username
 from models.buddy import BuddyFrontend, BuddyTable, BuddyInDB
 from models.user import UserInDB
 
-
-def get_buddy_by_id(session: Session, buddy_id: int):
-    buddy = session.get(BuddyTable, buddy_id)
-    if not buddy:
-        return None
-    return BuddyInDB.model_validate(buddy)
-
 def create_buddy_in_db(session: Session, current_user_id: int, buddy: BuddyFrontend):
 
     buddy_user = get_single_user_by_username(session, buddy.username)
@@ -74,9 +67,9 @@ def delete_buddies_by_id(session: Session, current_user_id: int, buddy: BuddyFro
             buddy_list.append(buddy)
 
 
-    buddy = session.get(BuddyTable, buddy_list[0].id)
-    if not buddy:
+    if not buddy_list:
         return None
+    buddy = session.get(BuddyTable, buddy_list[0].id)
     session.delete(buddy)
     session.commit()
     return 1
