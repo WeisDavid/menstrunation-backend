@@ -46,6 +46,18 @@ class UserTable(UserInDB, table=True):
 
     @classmethod
     def from_create_user(cls, user: CreateUser):
+        """
+        Create a UserInDB from a CreateUser.
+        
+        Exclude the `password` field from the `CreateUser` and add a `hashed_password`
+        field with the hashed password.
+        
+        Args:
+        - user (CreateUser): The CreateUser instance to convert.
+        
+        Returns:
+        - UserInDB: The converted UserInDB instance.
+        """
         return cls(
             **user.model_dump(exclude={"password"}),
             hashed_password=get_password_hash(user.password)

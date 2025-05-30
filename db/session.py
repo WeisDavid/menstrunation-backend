@@ -10,6 +10,18 @@ maria_url = os.getenv("DATABASE_URL") or "mysql+pymysql://fastapi_user:fastapi_p
 engine = create_engine(maria_url)
 
 def get_session():
+    """
+    Yields a database session.
+
+    The session is created using the engine connected to the database URL
+    specified in the environment variable `DATABASE_URL`. If `DATABASE_URL` is
+    not set, the session is created using the default database URL.
+
+    The session is automatically closed when the context manager is exited.
+
+    Returns:
+        Session: The database session.
+    """
     with Session(engine) as session:
         yield session
 

@@ -21,6 +21,19 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None) -> str:
+    """
+    Creates an access token using the given data and secret key.
+
+    The token will expire in the given timedelta, or 15 minutes if no timedelta is given.
+
+    Args:
+        data (dict): The data to encode in the token.
+        expires_delta (timedelta | None, optional): The timedelta until the token expires.
+            Defaults to None.
+
+    Returns:
+        str: The created access token.
+    """
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.now(timezone.utc) + expires_delta
@@ -32,6 +45,20 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None) -> s
 
 
 async def get_current_user(session: SessionDep, token: Annotated[str, Depends(oauth2_scheme)]) -> UserInDB:
+    """
+    Retrieves the current user from the database using the given token.
+
+    Args:
+        session (SessionDep): The SQLModel session to use to interact with the database.
+        token (Annotated[str, Depends(oauth2_scheme)]): The token to use for authentication.
+
+    Returns:
+        UserInDB: The current user.
+
+    Raises:
+        HTTPException: If the credentials are invalid or the user is not found.
+    """
+    
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
